@@ -1,0 +1,48 @@
+{
+	"key.category.musiccurator.general": "Music Curator",
+	"key.musiccurator.skip": "Skip track",
+	"key.musiccurator.pause": "Pause / resume music",
+	"key.musiccurator.toggle_hud": "Toggle HUD",
+
+	"musiccurator.config.title": "Music Curator",
+	"musiccurator.config.category.general": "General",
+	"musiccurator.config.category.hud": "HUD",
+	"musiccurator.config.category.tracks": "Tracks",
+
+	"musiccurator.config.enabled": "Enable Music Curator",
+	"musiccurator.config.enabled.tooltip": "When off, vanilla music plays normally.",
+	"musiccurator.config.preset": "Preset",
+	"musiccurator.config.min_delay": "Min delay",
+	"musiccurator.config.max_delay": "Max delay",
+	"musiccurator.config.override_delay": "Override vanilla delay",
+	"musiccurator.config.override_delay.tooltip": "Use only the configured min/max range between tracks.",
+
+	"musiccurator.config.hud.show": "Show HUD",
+	"musiccurator.config.hud.anchor": "Anchor",
+	"musiccurator.config.hud.offset_x": "X offset",
+	"musiccurator.config.hud.offset_y": "Y offset",
+	"musiccurator.config.hud.show_composer": "Show composer",
+	"musiccurator.config.hud.show_category": "Show category",
+
+	"musiccurator.preset.all_vanilla": "All vanilla",
+	"musiccurator.preset.c418_only": "C418 only",
+	"musiccurator.preset.nether_1_16": "+ Nether Update (1.16)",
+	"musiccurator.preset.caves_cliffs_1_18": "+ Caves & Cliffs (1.18)",
+	"musiccurator.preset.wild_1_19": "+ The Wild Update (1.19)",
+	"musiccurator.preset.latest": "+ 1.20 / 1.21 / 26.x",
+	"musiccurator.preset.custom": "Custom",
+
+	"musiccurator.anchor.top_left": "Top left",
+	"musiccurator.anchor.top_right": "Top right",
+	"musiccurator.anchor.bottom_left": "Bottom left",
+	"musiccurator.anchor.bottom_right": "Bottom right",
+
+	"musiccurator.hud.paused": "paused",
+	"musiccurator.hud.nothing": "Nothing playing",
+
+	"musiccurator.command.skip": "Skipped current track.",
+	"musiccurator.command.hud_on": "HUD shown.",
+	"musiccurator.command.hud_off": "HUD hidden.",
+	"musiccurator.command.preset": "Applied preset: %s",
+	"musiccurator.command.preset_unknown": "Unknown preset: %s"
+}

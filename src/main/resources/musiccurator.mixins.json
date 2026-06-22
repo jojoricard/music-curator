@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "com.musiccurator.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"MinecraftMixin",
+		"MusicManagerAccessor",
+		"MusicManagerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

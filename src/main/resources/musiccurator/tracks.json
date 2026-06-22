@@ -1,0 +1,60 @@
+[
+	{ "id": "minecraft:music.menu", "name": "Menu", "composer": "C418", "version": "1.0", "category": "menu" },
+	{ "id": "minecraft:music.credits", "name": "Credits", "composer": "C418", "version": "1.0", "category": "menu" },
+	{ "id": "minecraft:music.creative", "name": "Creative", "composer": "C418", "version": "1.0", "category": "creative" },
+
+	{ "id": "minecraft:music.game", "name": "Overworld", "composer": "C418", "version": "1.0", "category": "overworld" },
+	{ "id": "minecraft:music.under_water", "name": "Underwater", "composer": "C418", "version": "1.13", "category": "underwater" },
+
+	{ "id": "minecraft:music.end", "name": "The End", "composer": "C418", "version": "1.0", "category": "end" },
+	{ "id": "minecraft:music.dragon", "name": "Boss (Ender Dragon)", "composer": "C418", "version": "1.0", "category": "end" },
+
+	{ "id": "minecraft:music.nether.nether_wastes", "name": "Nether Wastes", "composer": "C418", "version": "1.16", "category": "nether" },
+	{ "id": "minecraft:music.nether.crimson_forest", "name": "Crimson Forest", "composer": "Lena Raine", "version": "1.16", "category": "nether" },
+	{ "id": "minecraft:music.nether.warped_forest", "name": "Warped Forest", "composer": "Lena Raine", "version": "1.16", "category": "nether" },
+	{ "id": "minecraft:music.nether.soul_sand_valley", "name": "Soul Sand Valley", "composer": "Lena Raine", "version": "1.16", "category": "nether" },
+	{ "id": "minecraft:music.nether.basalt_deltas", "name": "Basalt Deltas", "composer": "Lena Raine", "version": "1.16", "category": "nether" },
+
+	{ "id": "minecraft:music.overworld.dripstone_caves", "name": "Dripstone Caves", "composer": "Lena Raine", "version": "1.18", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.lush_caves", "name": "Lush Caves", "composer": "Lena Raine", "version": "1.18", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.frozen_peaks", "name": "Frozen Peaks", "composer": "Lena Raine", "version": "1.18", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.jagged_peaks", "name": "Jagged Peaks", "composer": "Lena Raine", "version": "1.18", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.snowy_slopes", "name": "Snowy Slopes", "composer": "Lena Raine", "version": "1.18", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.stony_peaks", "name": "Stony Peaks", "composer": "Lena Raine", "version": "1.18", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.grove", "name": "Grove", "composer": "Kumi Tanioka", "version": "1.18", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.meadow", "name": "Meadow", "composer": "Kumi Tanioka", "version": "1.18", "category": "overworld" },
+
+	{ "id": "minecraft:music.overworld.swamp", "name": "Swamp", "composer": "Lena Raine", "version": "1.19", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.jungle", "name": "Jungle", "composer": "Kumi Tanioka", "version": "1.19", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.sparse_jungle", "name": "Sparse Jungle", "composer": "Kumi Tanioka", "version": "1.19", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.deep_dark", "name": "Deep Dark", "composer": "Lena Raine", "version": "1.19", "category": "overworld" },
+
+	{ "id": "minecraft:music.overworld.cherry_grove", "name": "Cherry Grove", "composer": "Aaron Cherof", "version": "1.20", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.badlands", "name": "Badlands", "composer": "Aaron Cherof", "version": "1.20", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.desert", "name": "Desert", "composer": "Aaron Cherof", "version": "1.20", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.flower_forest", "name": "Flower Forest", "composer": "Aaron Cherof", "version": "1.20", "category": "overworld" },
+
+	{ "id": "minecraft:music.overworld.sulfur_caves", "name": "Sulfur Caves", "composer": "Aaron Cherof", "version": "26.2", "category": "overworld" },
+
+	{ "id": "minecraft:music_disc.13", "name": "13", "composer": "C418", "version": "1.0", "category": "disc" },
+	{ "id": "minecraft:music_disc.cat", "name": "Cat", "composer": "C418", "version": "1.0", "category": "disc" },
+	{ "id": "minecraft:music_disc.blocks", "name": "Blocks", "composer": "C418", "version": "1.0", "category": "disc" },
+	{ "id": "minecraft:music_disc.chirp", "name": "Chirp", "composer": "C418", "version": "1.0", "category": "disc" },
+	{ "id": "minecraft:music_disc.far", "name": "Far", "composer": "C418", "version": "1.0", "category": "disc" },
+	{ "id": "minecraft:music_disc.mall", "name": "Mall", "composer": "C418", "version": "1.0", "category": "disc" },
+	{ "id": "minecraft:music_disc.mellohi", "name": "Mellohi", "composer": "C418", "version": "1.0", "category": "disc" },
+	{ "id": "minecraft:music_disc.stal", "name": "Stal", "composer": "C418", "version": "1.0", "category": "disc" },
+	{ "id": "minecraft:music_disc.strad", "name": "Strad", "composer": "C418", "version": "1.0", "category": "disc" },
+	{ "id": "minecraft:music_disc.ward", "name": "Ward", "composer": "C418", "version": "1.0", "category": "disc" },
+	{ "id": "minecraft:music_disc.11", "name": "11", "composer": "C418", "version": "1.0", "category": "disc" },
+	{ "id": "minecraft:music_disc.wait", "name": "Wait", "composer": "C418", "version": "1.0", "category": "disc" },
+
+	{ "id": "minecraft:music_disc.pigstep", "name": "Pigstep", "composer": "Lena Raine", "version": "1.16", "category": "disc" },
+	{ "id": "minecraft:music_disc.otherside", "name": "Otherside", "composer": "Lena Raine", "version": "1.18", "category": "disc" },
+	{ "id": "minecraft:music_disc.5", "name": "5", "composer": "Samuel Aberg", "version": "1.19", "category": "disc" },
+	{ "id": "minecraft:music_disc.relic", "name": "Relic", "composer": "Aaron Cherof", "version": "1.20", "category": "disc" },
+	{ "id": "minecraft:music_disc.precipice", "name": "Precipice", "composer": "Aaron Cherof", "version": "1.21", "category": "disc" },
+	{ "id": "minecraft:music_disc.creator", "name": "Creator", "composer": "Lena Raine", "version": "1.21", "category": "disc" },
+	{ "id": "minecraft:music_disc.creator_music_box", "name": "Creator (Music Box)", "composer": "Lena Raine", "version": "1.21", "category": "disc" },
+	{ "id": "minecraft:music_disc.lava_chicken", "name": "Lava Chicken", "composer": "Hyper Potions", "version": "1.21", "category": "disc" }
+]

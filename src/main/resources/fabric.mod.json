@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "musiccurator",
+	"version": "${version}",
+	"name": "Music Curator",
+	"description": "Pick which vanilla music can play, set how often it plays, and see the current track in a small HUD.",
+	"authors": [],
+	"contact": {},
+	"license": "MIT",
+	"environment": "client",
+	"entrypoints": {
+		"main": [
+			"com.musiccurator.MusicCurator"
+		],
+		"client": [
+			"com.musiccurator.MusicCuratorClient"
+		],
+		"modmenu": [
+			"com.musiccurator.screen.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		{
+			"config": "musiccurator.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*",
+		"cloth-config": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}
