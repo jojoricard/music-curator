@@ -14,8 +14,8 @@
 	"musiccurator.config.preset": "Preset",
 	"musiccurator.config.min_delay": "Min delay",
 	"musiccurator.config.max_delay": "Max delay",
-	"musiccurator.config.override_delay": "Override vanilla delay",
-	"musiccurator.config.override_delay.tooltip": "Use only the configured min/max range between tracks.",
+	"musiccurator.config.override_delay": "Fixed interval (no random)",
+	"musiccurator.config.override_delay.tooltip": "Always wait exactly the min delay between tracks instead of a random value between min and max.",
 
 	"musiccurator.config.hud.show": "Show HUD",
 	"musiccurator.config.hud.anchor": "Anchor",

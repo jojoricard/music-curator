@@ -4,6 +4,7 @@ import com.musiccurator.config.ConfigManager;
 import com.musiccurator.config.ModConfig;
 import com.musiccurator.config.Preset;
 import com.musiccurator.config.Presets;
+import com.musiccurator.config.TrackRegistry;
 import com.musiccurator.mixin.MusicManagerAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.sounds.MusicManager;
@@ -41,11 +42,14 @@ public final class MusicController {
 		if (id == null) {
 			return false;
 		}
-		return cfg().enabledTracks.contains(id.toString());
-	}
-
-	public boolean overrideDelay() {
-		return cfg().overrideVanillaDelay;
+		String key = id.toString();
+		// Tracks the mod doesn't know about are never muted: we only filter what the
+		// user has explicitly disabled in the registry. This keeps unexpected/new
+		// vanilla music playing instead of going silent.
+		if (TrackRegistry.get(key) == null) {
+			return true;
+		}
+		return cfg().enabledTracks.contains(key);
 	}
 
 	public int minDelayTicks() {
@@ -53,8 +57,13 @@ public final class MusicController {
 	}
 
 	public int maxDelayTicks() {
-		int min = Math.max(1, cfg().minDelaySeconds);
-		int max = Math.max(min, cfg().maxDelaySeconds);
+		ModConfig c = cfg();
+		int min = Math.max(1, c.minDelaySeconds);
+		// "Fixed interval" mode: no randomness, always wait exactly the min delay.
+		if (c.overrideVanillaDelay) {
+			return min * 20;
+		}
+		int max = Math.max(min, c.maxDelaySeconds);
 		return max * 20;
 	}
 

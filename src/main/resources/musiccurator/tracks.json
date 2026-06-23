@@ -27,6 +27,7 @@
 	{ "id": "minecraft:music.overworld.swamp", "name": "Swamp", "composer": "Lena Raine", "version": "1.19", "category": "overworld" },
 	{ "id": "minecraft:music.overworld.jungle", "name": "Jungle", "composer": "Kumi Tanioka", "version": "1.19", "category": "overworld" },
 	{ "id": "minecraft:music.overworld.sparse_jungle", "name": "Sparse Jungle", "composer": "Kumi Tanioka", "version": "1.19", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.bamboo_jungle", "name": "Bamboo Jungle", "composer": "Kumi Tanioka", "version": "1.19", "category": "overworld" },
 	{ "id": "minecraft:music.overworld.deep_dark", "name": "Deep Dark", "composer": "Lena Raine", "version": "1.19", "category": "overworld" },
 
 	{ "id": "minecraft:music.overworld.cherry_grove", "name": "Cherry Grove", "composer": "Aaron Cherof", "version": "1.20", "category": "overworld" },
@@ -34,6 +35,8 @@
 	{ "id": "minecraft:music.overworld.desert", "name": "Desert", "composer": "Aaron Cherof", "version": "1.20", "category": "overworld" },
 	{ "id": "minecraft:music.overworld.flower_forest", "name": "Flower Forest", "composer": "Aaron Cherof", "version": "1.20", "category": "overworld" },
 
+	{ "id": "minecraft:music.overworld.forest", "name": "Forest", "composer": "", "version": "26.2", "category": "overworld" },
+	{ "id": "minecraft:music.overworld.old_growth_taiga", "name": "Old Growth Taiga", "composer": "", "version": "26.2", "category": "overworld" },
 	{ "id": "minecraft:music.overworld.sulfur_caves", "name": "Sulfur Caves", "composer": "Aaron Cherof", "version": "26.2", "category": "overworld" },
 
 	{ "id": "minecraft:music_disc.13", "name": "13", "composer": "C418", "version": "1.0", "category": "disc" },
@@ -56,5 +59,7 @@
 	{ "id": "minecraft:music_disc.precipice", "name": "Precipice", "composer": "Aaron Cherof", "version": "1.21", "category": "disc" },
 	{ "id": "minecraft:music_disc.creator", "name": "Creator", "composer": "Lena Raine", "version": "1.21", "category": "disc" },
 	{ "id": "minecraft:music_disc.creator_music_box", "name": "Creator (Music Box)", "composer": "Lena Raine", "version": "1.21", "category": "disc" },
-	{ "id": "minecraft:music_disc.lava_chicken", "name": "Lava Chicken", "composer": "Hyper Potions", "version": "1.21", "category": "disc" }
+	{ "id": "minecraft:music_disc.lava_chicken", "name": "Lava Chicken", "composer": "Hyper Potions", "version": "1.21", "category": "disc" },
+	{ "id": "minecraft:music_disc.tears", "name": "Tears", "composer": "Amos Roddy", "version": "1.21", "category": "disc" },
+	{ "id": "minecraft:music_disc.bounce", "name": "Bounce", "composer": "Amos Roddy", "version": "1.21", "category": "disc" }
 ]

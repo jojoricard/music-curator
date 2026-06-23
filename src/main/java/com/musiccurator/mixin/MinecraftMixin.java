@@ -33,9 +33,8 @@ public class MinecraftMixin {
 			return null;
 		}
 
-		if (controller.overrideDelay()) {
-			return new Music(original.sound(), controller.minDelayTicks(), controller.maxDelayTicks(), original.replaceCurrentMusic());
-		}
-		return original;
+		// Vanilla overworld delays are 10-20 min; always apply the configured range so
+		// music actually plays at the chosen frequency.
+		return new Music(original.sound(), controller.minDelayTicks(), controller.maxDelayTicks(), original.replaceCurrentMusic());
 	}
 }
