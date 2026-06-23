@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-// Reads the bundled vanilla track list. Discs are listed for the presets, but only
-// ambient music actually flows through MusicManager, so disc entries are inert in-game.
+// Reads the bundled per-track list. Each track is a single music .ogg keyed by its
+// file path (e.g. "music/game/sweden"), which matches Sound#getLocation() in-game.
 public final class TrackRegistry {
 	private static final Gson GSON = new Gson();
 
 	private static List<Track> tracks = List.of();
-	private static Map<String, Track> byId = Map.of();
+	private static Map<String, Track> byFile = Map.of();
 
 	private TrackRegistry() {
 	}
@@ -31,7 +31,7 @@ public final class TrackRegistry {
 			if (in == null) {
 				MusicCurator.LOGGER.warn("tracks.json not found; no tracks will be curated");
 				tracks = List.of();
-				byId = Map.of();
+				byFile = Map.of();
 				return;
 			}
 			Type type = new TypeToken<List<Track>>() {
@@ -42,13 +42,13 @@ public final class TrackRegistry {
 			}
 			Map<String, Track> map = new LinkedHashMap<>();
 			for (Track t : tracks) {
-				map.put(t.id(), t);
+				map.put(t.file(), t);
 			}
-			byId = Collections.unmodifiableMap(map);
+			byFile = Collections.unmodifiableMap(map);
 		} catch (Exception e) {
 			MusicCurator.LOGGER.error("Failed to read tracks.json", e);
 			tracks = List.of();
-			byId = Map.of();
+			byFile = Map.of();
 		}
 	}
 
@@ -56,11 +56,11 @@ public final class TrackRegistry {
 		return tracks;
 	}
 
-	public static Track get(String id) {
-		return byId.get(id);
+	public static Track get(String file) {
+		return byFile.get(file);
 	}
 
-	public static Set<String> allIds() {
-		return byId.keySet();
+	public static Set<String> allFiles() {
+		return byFile.keySet();
 	}
 }

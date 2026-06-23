@@ -30,7 +30,7 @@ public final class MusicHudOverlay {
 			return;
 		}
 
-		Identifier current = MusicController.getInstance().currentTrack();
+		Identifier current = MusicController.getInstance().currentSong();
 		if (current == null) {
 			return;
 		}
@@ -38,8 +38,8 @@ public final class MusicHudOverlay {
 		Minecraft mc = Minecraft.getInstance();
 		Font font = mc.font;
 
-		Track track = TrackRegistry.get(current.toString());
-		String name = track != null ? track.name() : current.getPath();
+		Track track = TrackRegistry.get(current.getPath());
+		String name = track != null ? track.title() : prettify(current.getPath());
 		if (MusicController.getInstance().isPaused()) {
 			name = name + " (" + Component.translatable("musiccurator.hud.paused").getString() + ")";
 		}
@@ -81,6 +81,18 @@ public final class MusicHudOverlay {
 			graphics.text(font, lines.get(i), x + PADDING, textY, color, true);
 			textY += font.lineHeight + 1;
 		}
+	}
+
+	// Fallback for songs missing from the registry: "music/game/foo_bar" -> "Foo Bar".
+	private static String prettify(String path) {
+		String base = path.substring(path.lastIndexOf('/') + 1).replace('_', ' ');
+		StringBuilder sb = new StringBuilder(base.length());
+		boolean cap = true;
+		for (char c : base.toCharArray()) {
+			sb.append(cap ? Character.toUpperCase(c) : c);
+			cap = c == ' ';
+		}
+		return sb.toString();
 	}
 
 	private static String subtitle(ModConfig cfg, Track track) {

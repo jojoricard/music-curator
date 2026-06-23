@@ -5,7 +5,8 @@
 	"client": [
 		"MinecraftMixin",
 		"MusicManagerAccessor",
-		"MusicManagerMixin"
+		"WeighedSoundEventsAccessor",
+		"WeighedSoundEventsMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

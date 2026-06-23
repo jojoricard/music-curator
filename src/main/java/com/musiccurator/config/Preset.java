@@ -3,10 +3,7 @@ package com.musiccurator.config;
 public enum Preset {
 	ALL_VANILLA("musiccurator.preset.all_vanilla", "all"),
 	C418_ONLY("musiccurator.preset.c418_only", "c418"),
-	NETHER_1_16("musiccurator.preset.nether_1_16", "nether"),
-	CAVES_CLIFFS_1_18("musiccurator.preset.caves_cliffs_1_18", "caves"),
-	WILD_1_19("musiccurator.preset.wild_1_19", "wild"),
-	LATEST("musiccurator.preset.latest", "latest"),
+	MODERN_ONLY("musiccurator.preset.modern_only", "modern"),
 	CUSTOM("musiccurator.preset.custom", "custom");
 
 	private final String translationKey;

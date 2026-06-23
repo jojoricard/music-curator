@@ -7,7 +7,8 @@ import java.util.Set;
 public class ModConfig {
 	public boolean enabled = true;
 	public Preset preset = Preset.ALL_VANILLA;
-	public Set<String> enabledTracks = new LinkedHashSet<>();
+	// Song files (e.g. "music/game/sweden") the user has turned off. Empty = everything plays.
+	public Set<String> disabledSongs = new LinkedHashSet<>();
 
 	public int minDelaySeconds = 60;
 	public int maxDelaySeconds = 300;

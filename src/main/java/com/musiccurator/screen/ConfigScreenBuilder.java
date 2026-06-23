@@ -32,32 +32,32 @@ final class ConfigScreenBuilder {
 				.setTitle(Component.translatable("musiccurator.config.title"));
 		ConfigEntryBuilder eb = builder.entryBuilder();
 
-		// Preset and track checkboxes are resolved together on save (see savingRunnable).
-		final Map<String, Boolean> draftTracks = new LinkedHashMap<>();
+		// Draft = which songs are enabled (true). Resolved against the preset on save.
+		final Map<String, Boolean> draftSongs = new LinkedHashMap<>();
 		for (Track t : TrackRegistry.all()) {
-			draftTracks.put(t.id(), cfg.enabledTracks.contains(t.id()));
+			draftSongs.put(t.file(), !cfg.disabledSongs.contains(t.file()));
 		}
 		final Preset originalPreset = cfg.preset;
 		final Preset[] draftPreset = {cfg.preset};
 
 		buildGeneral(builder, eb, cfg, draftPreset);
 		buildHud(builder, eb, cfg);
-		buildTracks(builder, eb, draftTracks);
+		buildTracks(builder, eb, draftSongs);
 
 		builder.setSavingRunnable(() -> {
 			boolean presetChanged = draftPreset[0] != originalPreset && draftPreset[0] != Preset.CUSTOM;
 			if (presetChanged) {
 				cfg.preset = draftPreset[0];
-				cfg.enabledTracks = Presets.tracksFor(draftPreset[0]);
+				cfg.disabledSongs = Presets.disabledFor(draftPreset[0]);
 			} else {
-				Set<String> set = new LinkedHashSet<>();
-				for (Map.Entry<String, Boolean> e : draftTracks.entrySet()) {
-					if (Boolean.TRUE.equals(e.getValue())) {
-						set.add(e.getKey());
+				Set<String> disabled = new LinkedHashSet<>();
+				for (Map.Entry<String, Boolean> e : draftSongs.entrySet()) {
+					if (!Boolean.TRUE.equals(e.getValue())) {
+						disabled.add(e.getKey());
 					}
 				}
-				cfg.enabledTracks = set;
-				cfg.preset = Presets.detect(set);
+				cfg.disabledSongs = disabled;
+				cfg.preset = Presets.detect(disabled);
 			}
 			ConfigManager.save();
 		});
@@ -134,32 +134,33 @@ final class ConfigScreenBuilder {
 				.build());
 	}
 
-	private static void buildTracks(ConfigBuilder builder, ConfigEntryBuilder eb, Map<String, Boolean> draftTracks) {
+	private static void buildTracks(ConfigBuilder builder, ConfigEntryBuilder eb, Map<String, Boolean> draftSongs) {
 		ConfigCategory tracks = builder.getOrCreateCategory(Component.translatable("musiccurator.config.category.tracks"));
 
+		// Group songs by composer, with a sensible ordering.
 		Map<String, List<Track>> grouped = new LinkedHashMap<>();
+		for (String composer : List.of("C418", "Lena Raine", "Kumi Tanioka", "Aaron Cherof")) {
+			grouped.put(composer, new ArrayList<>());
+		}
 		for (Track t : TrackRegistry.all()) {
-			grouped.computeIfAbsent(t.category(), k -> new ArrayList<>()).add(t);
+			String key = (t.composer() == null || t.composer().isEmpty()) ? "Other" : t.composer();
+			grouped.computeIfAbsent(key, k -> new ArrayList<>()).add(t);
 		}
 
 		for (Map.Entry<String, List<Track>> group : grouped.entrySet()) {
+			if (group.getValue().isEmpty()) {
+				continue;
+			}
 			List<AbstractConfigListEntry> entries = new ArrayList<>();
 			for (Track t : group.getValue()) {
-				entries.add(eb.startBooleanToggle(Component.literal(t.name() + " (" + t.version() + ")"), draftTracks.get(t.id()))
+				entries.add(eb.startBooleanToggle(Component.literal(t.title()), draftSongs.get(t.file()))
 						.setDefaultValue(true)
-						.setSaveConsumer(v -> draftTracks.put(t.id(), v))
+						.setSaveConsumer(v -> draftSongs.put(t.file(), v))
 						.build());
 			}
-			tracks.addEntry(eb.startSubCategory(Component.literal(capitalize(group.getKey())), entries)
+			tracks.addEntry(eb.startSubCategory(Component.literal(group.getKey() + " (" + group.getValue().size() + ")"), entries)
 					.setExpanded(false)
 					.build());
 		}
-	}
-
-	private static String capitalize(String s) {
-		if (s == null || s.isEmpty()) {
-			return s;
-		}
-		return Character.toUpperCase(s.charAt(0)) + s.substring(1);
 	}
 }

@@ -41,18 +41,14 @@ public final class ConfigManager {
 		if (loaded == null) {
 			loaded = new ModConfig();
 		}
-		if (loaded.enabledTracks == null) {
-			loaded.enabledTracks = new LinkedHashSet<>();
+		if (loaded.disabledSongs == null) {
+			loaded.disabledSongs = new LinkedHashSet<>();
 		}
 		if (loaded.preset == null) {
 			loaded.preset = Preset.ALL_VANILLA;
 		}
 		if (loaded.hudAnchor == null) {
 			loaded.hudAnchor = ModConfig.HudAnchor.TOP_RIGHT;
-		}
-		// First run (no saved selection yet): seed from the preset.
-		if (loaded.enabledTracks.isEmpty() && loaded.preset != Preset.CUSTOM) {
-			loaded.enabledTracks = Presets.tracksFor(loaded.preset);
 		}
 
 		config = loaded;

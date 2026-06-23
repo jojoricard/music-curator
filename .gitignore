@@ -19,3 +19,4 @@ build/
 # Fabric / Loom
 run/
 remappedSrc/
+run-validate*.log

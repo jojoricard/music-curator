@@ -26,10 +26,7 @@
 
 	"musiccurator.preset.all_vanilla": "All vanilla",
 	"musiccurator.preset.c418_only": "C418 only",
-	"musiccurator.preset.nether_1_16": "+ Nether Update (1.16)",
-	"musiccurator.preset.caves_cliffs_1_18": "+ Caves & Cliffs (1.18)",
-	"musiccurator.preset.wild_1_19": "+ The Wild Update (1.19)",
-	"musiccurator.preset.latest": "+ 1.20 / 1.21 / 26.x",
+	"musiccurator.preset.modern_only": "Modern only (no C418)",
 	"musiccurator.preset.custom": "Custom",
 
 	"musiccurator.anchor.top_left": "Top left",
