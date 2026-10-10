@@ -1,0 +1,19 @@
+{
+	"schemaVersion": 1,
+	"id": "musiccurator-gametest",
+	"version": "1.0.0",
+	"name": "Music Curator Game Tests",
+	"environment": "client",
+	"entrypoints": {
+		"fabric-client-gametest": [
+			"com.musiccurator.gametest.TrackCatalogueTest",
+			"com.musiccurator.gametest.SongSelectionTest",
+			"com.musiccurator.gametest.ConfigFileTest",
+			"com.musiccurator.gametest.PlaybackTest"
+		]
+	},
+	"depends": {
+		"musiccurator": "*",
+		"fabric-client-gametest-api-v1": "*"
+	}
+}

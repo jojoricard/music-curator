@@ -1,0 +1,19 @@
+{
+	"required": true,
+	"package": "com.musiccurator.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"AbstractSoundInstanceMixin",
+		"MinecraftMixin",
+		"MusicFrequencyMixin",
+		"MusicManagerAccessor",
+		"SoundEngineAccessor",
+		"SoundEngineMixin",
+		"SoundEventReferenceAccessor",
+		"SoundManagerAccessor",
+		"WeighedSoundEventsAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
