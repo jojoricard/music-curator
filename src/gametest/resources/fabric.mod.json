@@ -9,7 +9,8 @@
 			"com.musiccurator.gametest.TrackCatalogueTest",
 			"com.musiccurator.gametest.SongSelectionTest",
 			"com.musiccurator.gametest.ConfigFileTest",
-			"com.musiccurator.gametest.PlaybackTest"
+			"com.musiccurator.gametest.PlaybackTest",
+			"com.musiccurator.gametest.ScreenshotTest"
 		]
 	},
 	"depends": {

@@ -2,6 +2,14 @@
 
 Client mod for Minecraft 26.2. Pick which vanilla music can play, mark favorites, set how often music plays, pause it without losing your place, and see the current track in a small HUD. Available in English and French.
 
+| The HUD | `/musiccurator status` |
+| --- | --- |
+| ![HUD showing the current track, its composer and category](docs/screenshots/hud.png) | ![Status command output in the chat](docs/screenshots/status.png) |
+| **Tracks tab** | **Favorites tab** |
+| ![Settings screen, Tracks tab with the C418 group expanded](docs/screenshots/tracks.png) | ![Settings screen, Favorites tab](docs/screenshots/favorites.png) |
+
+The screenshots are produced by the client game tests (`ScreenshotTest`); to refresh them, run `./gradlew runClientGameTest` and copy `build/run/clientGameTest/screenshots/000N_music-curator-<name>.png` to `docs/screenshots/<name>.png`.
+
 ## Requirements
 
 
