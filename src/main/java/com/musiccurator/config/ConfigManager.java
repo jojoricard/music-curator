@@ -4,7 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.musiccurator.MusicCurator;
+//? if fabric {
 import net.fabricmc.loader.api.FabricLoader;
+//?} else {
+/*import net.neoforged.fml.loading.FMLPaths;
+*///?}
 
 import java.io.IOException;
 import java.io.Reader;
@@ -21,7 +25,11 @@ public final class ConfigManager {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final String FILE_NAME = "music-curator.json";
 	private static final String BROKEN_FILE_NAME = FILE_NAME + ".broken";
+	//? if fabric {
 	private static final Path PATH = FabricLoader.getInstance().getConfigDir().resolve(FILE_NAME);
+	//?} else {
+	/*private static final Path PATH = FMLPaths.CONFIGDIR.get().resolve(FILE_NAME);
+	*///?}
 
 	private static ModConfig config;
 

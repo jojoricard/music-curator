@@ -1,5 +1,8 @@
 package com.musiccurator.mixin;
 
+// 1.21.1 has no Music Frequency option: MusicManager takes the delays straight from the Music, which
+// MinecraftMixin already rewrites. The build leaves this mixin out of musiccurator.mixins.json there.
+//? if >1.21.1 {
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.musiccurator.music.MusicController;
 import net.minecraft.client.sounds.MusicManager;
@@ -23,3 +26,4 @@ public class MusicFrequencyMixin {
 		return Mth.nextInt(random, music.minDelay(), music.maxDelay());
 	}
 }
+//?}

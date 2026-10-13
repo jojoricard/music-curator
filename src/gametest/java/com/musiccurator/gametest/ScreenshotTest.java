@@ -1,5 +1,6 @@
 package com.musiccurator.gametest;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.musiccurator.config.ConfigManager;
 import com.musiccurator.config.ModConfig;
 import com.musiccurator.music.MusicController;
@@ -12,14 +13,13 @@ import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.network.chat.Component;
-import org.lwjgl.glfw.GLFW;
 
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Set;
 
 // Renders the HUD, /musiccurator status and the settings tabs in a real world and saves the screenshots
-// shown in the README (build/run/clientGameTest/screenshots; copy them to docs/screenshots).
+// shown in the README (versions/<version>/build/run/clientGameTest/screenshots; copy them to docs/screenshots).
 public class ScreenshotTest implements FabricClientGameTest {
 	private static final int HALF_A_MINUTE = 20 * 30;
 
@@ -34,7 +34,7 @@ public class ScreenshotTest implements FabricClientGameTest {
 		int guiScale = context.computeOnClient(client -> client.options.guiScale().get());
 		context.runOnClient(client -> {
 			client.options.guiScale().set(2);
-			client.resizeGui();
+			Compat.resizeGui(client);
 		});
 		try (TestSingleplayerContext world = context.worldBuilder().create()) {
 			context.runOnClient(client -> {
@@ -51,7 +51,7 @@ public class ScreenshotTest implements FabricClientGameTest {
 			context.getInput().pressKey(options -> options.keyChat);
 			context.waitForScreen(ChatScreen.class);
 			context.getInput().typeChars("/musiccurator status");
-			context.getInput().pressKey(GLFW.GLFW_KEY_ENTER);
+			context.getInput().pressKey(InputConstants.KEY_RETURN);
 			context.waitTicks(5);
 			context.takeScreenshot("music-curator-status");
 
@@ -69,7 +69,7 @@ public class ScreenshotTest implements FabricClientGameTest {
 				cfg.hudShowCategory = showCategory;
 				cfg.favoriteSongs = favorites;
 				client.options.guiScale().set(guiScale);
-				client.resizeGui();
+				Compat.resizeGui(client);
 			});
 		}
 	}
@@ -81,7 +81,7 @@ public class ScreenshotTest implements FabricClientGameTest {
 			context.runOnClient(client -> {
 				Field field = ClothConfigScreen.class.getDeclaredField("tabButtons");
 				field.setAccessible(true);
-				for (Object tab : (List<?>) field.get(client.gui.screen())) {
+				for (Object tab : (List<?>) field.get(Compat.screen(client))) {
 					ClothConfigTabButton button = (ClothConfigTabButton) tab;
 					if (button.getMessage().equals(Component.translatable(categoryKey))) {
 						button.onPress(null);
@@ -98,7 +98,7 @@ public class ScreenshotTest implements FabricClientGameTest {
 
 	private static void expandFirstComposer(ClientGameTestContext context) {
 		context.runOnClient(client -> {
-			ClothConfigScreen screen = (ClothConfigScreen) client.gui.screen();
+			ClothConfigScreen screen = (ClothConfigScreen) Compat.screen(client);
 			for (Object entry : screen.listWidget.children()) {
 				if (entry instanceof SubCategoryListEntry group) {
 					group.setExpanded(true);

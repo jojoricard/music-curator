@@ -25,8 +25,13 @@ public abstract class AbstractSoundInstanceMixin {
 	@Final
 	protected SoundSource source;
 
+	// 26.3 renamed resolve() to getOrResolve(); the method body is unchanged.
 	@WrapOperation(
+			//? if >=26.3 {
+			/*method = "getOrResolve",
+			*///?} else {
 			method = "resolve",
+			//?}
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/sounds/WeighedSoundEvents;getSound(Lnet/minecraft/util/RandomSource;)Lnet/minecraft/client/resources/sounds/Sound;"))

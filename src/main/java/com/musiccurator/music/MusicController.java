@@ -79,15 +79,24 @@ public final class MusicController {
 	// Background music in a world, which the player's delays apply to. The title screen (MENU) and the
 	// scores vanilla chains without any gap (dragon fight, end credits: 0-0 delays) keep the game's timing.
 	public boolean usesPlayerFrequency(Music music) {
+		//? if >1.21.1 {
 		return isEnabled() && music != Musics.MENU && music.maxDelay() != 0;
+		//?} else {
+		/*return isEnabled() && music != Musics.MENU && music.getMaxDelay() != 0;
+		*///?}
 	}
 
 	public Music withDelays(Music original) {
 		if (!usesPlayerFrequency(original)) {
 			return original;
 		}
+		//? if >1.21.1 {
 		return new Music(original.sound(), minDelaySeconds() * TICKS_PER_SECOND, maxDelaySeconds() * TICKS_PER_SECOND,
 				original.replaceCurrentMusic());
+		//?} else {
+		/*return new Music(original.getEvent(), minDelaySeconds() * TICKS_PER_SECOND, maxDelaySeconds() * TICKS_PER_SECOND,
+				original.replaceCurrentMusic());
+		*///?}
 	}
 
 	@Nullable
@@ -110,7 +119,7 @@ public final class MusicController {
 		return paused;
 	}
 
-	// Pausing freezes the song's audio channel, so resuming continues it where it stopped. MinecraftMixin
+	// Pausing freezes the song's audio channel, so resuming continues it where it stopped. MusicManagerMixin
 	// keeps MusicManager from starting another song meanwhile.
 	private void setPaused(boolean pause) {
 		if (pause == paused) {

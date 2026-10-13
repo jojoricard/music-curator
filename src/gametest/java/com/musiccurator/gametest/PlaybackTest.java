@@ -4,6 +4,7 @@ import com.musiccurator.mixin.MusicManagerAccessor;
 import com.musiccurator.mixin.SoundEngineAccessor;
 import com.musiccurator.mixin.SoundManagerAccessor;
 import com.musiccurator.music.MusicController;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.fabric.api.client.gametest.v1.FabricClientGameTest;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext;
@@ -14,7 +15,6 @@ import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -54,7 +54,7 @@ public class PlaybackTest implements FabricClientGameTest {
 			// The chat screen closes right after running a command: the settings screen must outlive that.
 			runInChat(context, "/musiccurator config");
 			Component title = Component.translatable("musiccurator.config.title");
-			context.waitFor(client -> client.gui.screen() != null && client.gui.screen().getTitle().equals(title));
+			context.waitFor(client -> Compat.screen(client) != null && Compat.screen(client).getTitle().equals(title));
 			context.setScreen(() -> null);
 
 			boolean pausedBefore = context.computeOnClient(client -> MusicController.getInstance().isPaused());
@@ -71,7 +71,7 @@ public class PlaybackTest implements FabricClientGameTest {
 		context.getInput().pressKey(options -> options.keyChat);
 		context.waitForScreen(ChatScreen.class);
 		context.getInput().typeChars(command);
-		context.getInput().pressKey(GLFW.GLFW_KEY_ENTER);
+		context.getInput().pressKey(InputConstants.KEY_RETURN);
 		context.waitTick();
 	}
 

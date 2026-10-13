@@ -1,0 +1,85 @@
+// Build script of every NeoForge version (see settings.gradle); `stonecutter.current` is the version being built.
+plugins {
+	id 'net.neoforged.moddev' version '2.0.148'
+}
+
+def minecraftVersion = stonecutter.current.version
+def javaVersion = stonecutter.current.parsed.matches('>=26.1') ? 25 : 21
+// 1.21.1 has no Music Frequency option, so MusicFrequencyMixin has no target there (its source is commented out).
+def excludedMixins = stonecutter.current.parsed.matches('>1.21.1') ? [] : ['MusicFrequencyMixin']
+
+version = "${project.mod_version}+${minecraftVersion}"
+group = project.maven_group
+
+base {
+	archivesName = "${project.archives_base_name}-neoforge"
+}
+
+repositories {
+	// Cloth Config (config screen library).
+	maven { url = 'https://maven.shedaniel.me/' }
+}
+
+neoForge {
+	version = project.neoforge_version
+
+	mods {
+		musiccurator {
+			sourceSet sourceSets.main
+		}
+	}
+
+	runs {
+		client {
+			client()
+			// Every version and loader shares the dev run directory at the repository root (config, options,
+			// worlds). A world opened by a newer version cannot be loaded back by an older one.
+			gameDirectory = rootProject.file('run')
+		}
+	}
+}
+
+dependencies {
+	implementation "me.shedaniel.cloth:cloth-config-neoforge:${project.cloth_config_version}"
+}
+
+processResources {
+	def props = [
+			"version"  : project.version,
+			"minecraft": project.minecraft_dependency,
+			"neoforge" : project.neoforge_dependency,
+			"iconKey"  : stonecutter.current.parsed.matches('>1.21.11') ? 'iconFile' : 'logoFile'
+	]
+	inputs.properties props
+	inputs.property "excludedMixins", excludedMixins
+
+	filesMatching("META-INF/neoforge.mods.toml") {
+		expand props
+	}
+	// Mixin refuses to start when the declared level is above the running Java version.
+	filesMatching("musiccurator.mixins.json") {
+		expand "java": "JAVA_${javaVersion}"
+		filter { line -> excludedMixins.any { line.contains("\"${it}\"") } ? null : line }
+	}
+	exclude "fabric.mod.json"
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = javaVersion
+}
+
+java {
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.toVersion(javaVersion)
+	targetCompatibility = JavaVersion.toVersion(javaVersion)
+}
+
+jar {
+	def projectName = rootProject.name
+	inputs.property "projectName", projectName
+
+	from(rootProject.file("LICENSE")) {
+		rename { "${it}_$projectName" }
+	}
+}

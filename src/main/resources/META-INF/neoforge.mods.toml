@@ -1,0 +1,40 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/jojoricard/music-curator/issues"
+
+[[mods]]
+modId = "musiccurator"
+version = "${version}"
+displayName = "Music Curator"
+displayURL = "https://github.com/jojoricard/music-curator"
+# NeoForge for 1.21 reads the icon from logoFile; NeoForge for 26.x reads iconFile and warns about logoFile.
+${iconKey} = "assets/musiccurator/icon.png"
+authors = "RICARD Joris"
+description = "Pick which vanilla music can play, set how often it plays, and see the current track in a small HUD."
+# Client-only: servers neither need the mod nor check its version.
+displayTest = "IGNORE_ALL_VERSION"
+
+[[mixins]]
+config = "musiccurator.mixins.json"
+
+[[dependencies.musiccurator]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neoforge}"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.musiccurator]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft}"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.musiccurator]]
+modId = "cloth_config"
+type = "required"
+versionRange = "*"
+ordering = "NONE"
+side = "CLIENT"

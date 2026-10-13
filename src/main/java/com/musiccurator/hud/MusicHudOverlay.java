@@ -8,13 +8,19 @@ import com.musiccurator.music.MusicController;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
+
+// 26.1 renamed GuiGraphics to GuiGraphicsExtractor, and drawString to text.
+//? if >=26.1 {
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+//?} else {
+/*import net.minecraft.client.gui.GuiGraphics;
+*///?}
 
 // HUD box in a screen corner showing the playing track (title, then composer and/or category), or
 // that music is paused.
@@ -28,7 +34,11 @@ public final class MusicHudOverlay {
 	private MusicHudOverlay() {
 	}
 
+	//? if >=26.1 {
 	public static void render(GuiGraphicsExtractor graphics, DeltaTracker delta) {
+	//?} else {
+	/*public static void render(GuiGraphics graphics, DeltaTracker delta) {
+	*///?}
 		ModConfig cfg = ConfigManager.get();
 		if (!cfg.enabled || !cfg.showHud) {
 			return;
@@ -65,7 +75,11 @@ public final class MusicHudOverlay {
 		int textY = y + PADDING;
 		for (int i = 0; i < lines.size(); i++) {
 			int color = i == 0 ? TITLE_COLOR : SUB_COLOR;
+			//? if >=26.1 {
 			graphics.text(font, lines.get(i), x + PADDING, textY, color, true);
+			//?} else {
+			/*graphics.drawString(font, lines.get(i), x + PADDING, textY, color, true);
+			*///?}
 			textY += font.lineHeight + LINE_SPACING;
 		}
 	}

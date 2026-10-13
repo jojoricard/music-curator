@@ -175,7 +175,7 @@ public class SongSelectionTest implements FabricClientGameTest {
 	private static String resolve(Minecraft client, String eventName, boolean music) {
 		SoundEvent event = SoundEvent.createVariableRangeEvent(Identifier.withDefaultNamespace(eventName));
 		SoundInstance instance = music ? SimpleSoundInstance.forMusic(event) : SimpleSoundInstance.forJukeboxSong(event, Vec3.ZERO);
-		instance.resolve(client.getSoundManager());
+		Compat.resolve(instance, client);
 		return instance.getSound().getLocation().getPath();
 	}
 
