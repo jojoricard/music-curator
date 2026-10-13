@@ -11,6 +11,7 @@ import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
@@ -32,6 +33,17 @@ public final class ConfigScreenBuilder {
 			List.of("C418", "Lena Raine", "Kumi Tanioka", "Aaron Cherof", "Amos Roddy", "fingerspit");
 
 	private ConfigScreenBuilder() {
+	}
+
+	// Opens the settings over the game; closing them returns to it.
+	public static void open(Minecraft client) {
+		Screen screen = build(null);
+		// Screens moved from Minecraft to its Gui in 26.1.
+		//? if >=26.1 {
+		client.gui.setScreen(screen);
+		//?} else {
+		/*client.setScreen(screen);
+		*///?}
 	}
 
 	// parent: the screen to return to when closing, or null to return to the game.

@@ -9,9 +9,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 // Read-only catalogue of the vanilla music tracks, loaded once from the bundled tracks.json.
 // Titles and composers copy the game's own "Now Playing" names (vanilla en_us.json keys such as
@@ -19,6 +23,8 @@ import java.util.Map;
 public final class TrackRegistry {
 	private static final String RESOURCE = "/musiccurator/tracks.json";
 	private static final Gson GSON = new Gson();
+	// Each jar is built for one Minecraft version, which Stonecutter writes here.
+	private static final String GAME_VERSION = /*$ minecraft*/ "26.2";
 
 	private static List<Track> tracks = List.of();
 	private static Map<String, Track> byFile = Map.of();
@@ -43,18 +49,42 @@ public final class TrackRegistry {
 			throw new IllegalStateException(RESOURCE + " lists no tracks");
 		}
 
-		Map<String, Track> index = new HashMap<>();
+		// One catalogue serves every supported Minecraft version: tracks newer than the running game are left out.
+		int[] game = releaseNumbers(GAME_VERSION);
+		Set<String> files = new HashSet<>();
+		List<Track> available = new ArrayList<>();
 		for (Track track : parsed) {
 			if (track == null || isBlank(track.file()) || isBlank(track.title())
 					|| isBlank(track.composer()) || isBlank(track.category())) {
 				throw new IllegalStateException("Incomplete entry in " + RESOURCE + ": " + track);
 			}
-			if (index.putIfAbsent(track.file(), track) != null) {
+			if (!files.add(track.file())) {
 				throw new IllegalStateException("Duplicate entry in " + RESOURCE + ": " + track.file());
 			}
+			if (track.since() == null || Arrays.compare(game, since(track)) >= 0) {
+				available.add(track);
+			}
 		}
-		tracks = List.copyOf(parsed);
+
+		Map<String, Track> index = new HashMap<>();
+		for (Track track : available) {
+			index.put(track.file(), track);
+		}
+		tracks = List.copyOf(available);
 		byFile = Map.copyOf(index);
+	}
+
+	private static int[] since(Track track) {
+		try {
+			return releaseNumbers(track.since());
+		} catch (NumberFormatException e) {
+			throw new IllegalStateException("Invalid 'since' version in " + RESOURCE + ": " + track, e);
+		}
+	}
+
+	// "1.21.11" -> [1, 21, 11], which Arrays.compare orders like release numbers (1.21 < 1.21.1 < 1.21.11 < 26.2).
+	private static int[] releaseNumbers(String version) {
+		return Arrays.stream(version.split("\\.")).mapToInt(Integer::parseInt).toArray();
 	}
 
 	public static List<Track> all() {

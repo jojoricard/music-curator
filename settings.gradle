@@ -4,7 +4,36 @@ pluginManagement {
 			name = 'Fabric'
 			url = 'https://maven.fabricmc.net/'
 		}
+		maven {
+			name = 'NeoForged'
+			url = 'https://maven.neoforged.net/releases/'
+		}
+		maven {
+			name = 'KikuGie Releases'
+			url = 'https://maven.kikugie.dev/releases'
+		}
 		gradlePluginPortal()
+	}
+}
+
+plugins {
+	id 'dev.kikugie.stonecutter' version '0.9.8'
+}
+
+// One subproject per Minecraft version and loader (versions/<minecraft>-<loader>), all built from the shared
+// src/ by that loader's script (build.<loader>.gradle). Version- and loader-specific code uses Stonecutter
+// comments such as //? if >=26.1 { ... //?} or //? if neoforge { ... //?}
+stonecutter {
+	kotlinController = false
+
+	create(rootProject) {
+		for (minecraft in ['1.21.1', '1.21.11', '26.2', '26.3']) {
+			for (loader in ['fabric', 'neoforge']) {
+				version("${minecraft}-${loader}".toString(), minecraft).buildscript("build.${loader}.gradle".toString())
+			}
+		}
+		// The sources committed to git are written for this version.
+		vcsVersion = '26.2-fabric'
 	}
 }
 

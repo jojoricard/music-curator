@@ -1,0 +1,32 @@
+plugins {
+	id 'dev.kikugie.stonecutter'
+}
+
+// The version the sources are currently written for. Switch it with the "Set active project" task
+// (Stonecutter rewrites this line), not by hand.
+stonecutter.active '26.2-fabric'
+
+// NeoForge decompiles and recompiles Minecraft once per version; doing several at once exhausts memory.
+abstract class MinecraftArtifactsMutex implements BuildService<org.gradle.api.services.BuildServiceParameters.None> {
+}
+
+def minecraftArtifactsMutex = gradle.sharedServices.registerIfAbsent('createMinecraftArtifactsMutex', MinecraftArtifactsMutex) {
+	maxParallelUsages = 1
+}
+subprojects {
+	tasks.matching { it.name == 'createMinecraftArtifacts' }.configureEach {
+		usesService(minecraftArtifactsMutex)
+	}
+}
+
+stonecutter.parameters {
+	def loader = current.project.split('-')[1]
+	// Lets sources test the loader: //? if fabric { ... //?} and //? if neoforge { ... //?}
+	constants.match(loader, 'fabric', 'neoforge')
+	// The Minecraft version a jar is built for, written in sources as: /*$ minecraft*/ "26.2";
+	swaps.put('minecraft', "\"${node.metadata.version}\";".toString())
+	// Mojang renamed ResourceLocation to Identifier in 1.21.11.
+	replacements.string(current.parsed.matches('>=1.21.11')) {
+		replace('ResourceLocation', 'Identifier')
+	}
+}

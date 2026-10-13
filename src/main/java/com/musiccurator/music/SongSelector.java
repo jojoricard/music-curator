@@ -69,7 +69,7 @@ public final class SongSelector {
 				collect(child, out);
 			}
 		} else if (entry instanceof SoundEventReferenceAccessor reference) {
-			collect(Minecraft.getInstance().getSoundManager().getSoundEvent(reference.musiccurator$getEvent()), out);
+			collect(Minecraft.getInstance().getSoundManager().getSoundEvent(reference.musiccurator$getEntry().getLocation()), out);
 		}
 	}
 
