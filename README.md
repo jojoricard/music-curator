@@ -8,7 +8,7 @@ Client mod for Minecraft 26.3, 26.2, 1.21.11 and 1.21.1, on Fabric and NeoForge.
 | **Tracks tab** | **Favorites tab** |
 | ![Settings screen, Tracks tab with the C418 group expanded](docs/screenshots/tracks.png) | ![Settings screen, Favorites tab](docs/screenshots/favorites.png) |
 
-The screenshots are produced by the client game tests (`ScreenshotTest`); to refresh them, run `./gradlew :26.2-fabric:runClientGameTest` and copy `versions/26.2-fabric/build/run/clientGameTest/screenshots/000N_music-curator-<name>.png` to `docs/screenshots/<name>.png`.
+The screenshots are produced by the client game tests (`ScreenshotTest`). To refresh them, run `./gradlew :26.2-fabric:runClientGameTest` and copy `versions/26.2-fabric/build/run/clientGameTest/screenshots/000N_music-curator-<name>.png` to `docs/screenshots/<name>.png`.
 
 ## Requirements
 
@@ -46,10 +46,10 @@ Download the jar matching your loader and Minecraft version (`music-curator-<loa
 
 Open with `/musiccurator config`, the *Open settings* keybind, or the mods list: Mod Menu → Music Curator → Config on Fabric, Mods → Music Curator → Config on NeoForge. Sections:
 
-- **General** — master toggle, preset, min/max delay between tracks, fixed interval
-- **HUD** — show/hide, anchor, x/y offset, composer/category line
-- **Tracks** — every vanilla track of your Minecraft version, grouped by composer, each with its own toggle
-- **Favorites** — tracks that play three times as often as the others
+- **General**: master toggle, preset, min/max delay between tracks, fixed interval
+- **HUD**: show/hide, anchor, x/y offset, composer/category line
+- **Tracks**: every vanilla track of your Minecraft version, grouped by composer, each with its own toggle
+- **Favorites**: tracks that play three times as often as the others
 
 Picking a preset replaces the whole track selection. Toggling individual tracks switches the preset to *Custom*, unless the result matches a preset. Disabling the track that is playing stops it right away.
 
@@ -61,7 +61,7 @@ Picking a preset replaces the whole track selection. Toggling individual tracks 
 | All vanilla           | `all`    | every track                            |
 | C418 only             | `c418`   | tracks composed by C418                |
 | Modern only (no C418) | `modern` | every track not composed by C418       |
-| Custom                | —        | your own selection from the Tracks tab |
+| Custom                | n/a        | your own selection from the Tracks tab |
 
 
 A preset is a rule, not a snapshot: when an update adds tracks or corrects a composer, your preset follows on the next launch. Presets never change your favorites.
@@ -70,14 +70,14 @@ A preset is a rule, not a snapshot: when an update adds tracks or corrects a com
 
 Client-side commands:
 
-- `/musiccurator skip` — play another track now
-- `/musiccurator pause` — pause or resume the music
-- `/musiccurator status` — preset, enabled tracks, favorites, current track and delays
-- `/musiccurator config` — open the settings screen
-- `/musiccurator hud toggle` — show or hide the HUD
-- `/musiccurator preset <all|c418|modern>` — apply a preset
+- `/musiccurator skip`: play another track now
+- `/musiccurator pause`: pause or resume the music
+- `/musiccurator status`: preset, enabled tracks, favorites, current track and delays
+- `/musiccurator config`: open the settings screen
+- `/musiccurator hud toggle`: show or hide the HUD
+- `/musiccurator preset <all|c418|modern>`: apply a preset
 
-Keybinds for skip, pause/resume, HUD toggle and open settings are unbound by default — set them in Options → Controls → Key Binds → Music Curator. Their result shows above the hotbar.
+Keybinds for skip, pause/resume, HUD toggle and open settings are unbound by default. Set them in Options → Controls → Key Binds → Music Curator. Their result shows above the hotbar.
 
 ## Notes
 
@@ -85,7 +85,7 @@ Keybinds for skip, pause/resume, HUD toggle and open settings are unbound by def
 - When the current biome or situation has none of your tracks, a track from your selection plays instead. With every track disabled, no music plays.
 - A new track never repeats the previous one when another is available, so skipping always changes the song.
 - The delays apply to background music in worlds, where they replace vanilla's Options → Music & Sounds → Music Frequency (1.21.1 has no such option). The title screen, the Ender Dragon fight and the end credits keep the game's timing.
-- Pausing freezes the current track and resuming continues it where it stopped; skipping while paused plays the next track. The pause lasts until you resume or restart the game, and the HUD shows it.
+- Pausing freezes the current track and resuming continues it where it stopped. Skipping while paused plays the next track. The pause lasts until you resume or restart the game, and the HUD shows it.
 
 ## Config file
 
@@ -97,10 +97,10 @@ If the file cannot be parsed, it is renamed to `music-curator.json.broken` and d
 
 Needs JDK 25 (it also compiles the Java 21 jars for 1.21.11 and 1.21.1).
 
-The project builds every supported Minecraft version and loader from the same sources with [Stonecutter](https://stonecutter.kikugie.dev/): each pair is a Gradle subproject under `versions/<minecraft>-<loader>/`, whose `gradle.properties` holds its dependency versions, built by `build.fabric.gradle` (Fabric Loom) or `build.neoforge.gradle` (ModDevGradle). Code that differs between versions or loaders is wrapped in Stonecutter comments (`//? if >=26.1 { ... //?} else { ... //?}`, `//? if neoforge { ... //?}`); the committed sources are written for 26.2 on Fabric. Each loader has its own entrypoint (`MusicCuratorFabric`, `MusicCuratorNeoForge`); everything else is shared.
+The project builds every supported Minecraft version and loader from the same sources with [Stonecutter](https://stonecutter.kikugie.dev/): each pair is a Gradle subproject under `versions/<minecraft>-<loader>/`, whose `gradle.properties` holds its dependency versions, built by `build.fabric.gradle` (Fabric Loom) or `build.neoforge.gradle` (ModDevGradle). Code that differs between versions or loaders is wrapped in Stonecutter comments (`//? if >=26.1 { ... //?} else { ... //?}`, `//? if neoforge { ... //?}`). The committed sources are written for 26.2 on Fabric. Each loader has its own entrypoint (`MusicCuratorFabric`, `MusicCuratorNeoForge`), and everything else is shared.
 
 ```
-./gradlew build                                  # everything; jars land in versions/<minecraft>-<loader>/build/libs/
+./gradlew build                                  # everything, jars land in versions/<minecraft>-<loader>/build/libs/
 ./gradlew :1.21.1-neoforge:build                 # a single version and loader
 ./gradlew :1.21.1-neoforge:runClient             # launch a dev client (all versions share the run/ folder)
 ./gradlew :26.2-fabric:runClientGameTest         # client game tests (Fabric 1.21.11+): opens the game, needs an audio device
